@@ -13,4 +13,3 @@
 
 {% set mdb = salt['pillar.get']('mongodb', default=defaults.mongodb, merge=True) %}
 {% set ms = salt['pillar.get']('mongos', default=defaults.mongos, merge=True) %}
-{% set cfg = salt['pillar.get']('configsvr', default=defaults.cfgsvr, merge=True) %}
