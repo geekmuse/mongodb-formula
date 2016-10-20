@@ -40,3 +40,27 @@ mongos:
 
   settings:
     port: 27017
+
+cfgsvr:
+  mongodb_package: mongodb
+  keyid: EA312927
+  pip: python-pip
+
+  # MongoDB 2.4 configuration
+  mongodb_user: mongodb
+  mongodb_group: mongodb
+  mongod: mongodb
+
+  conf_path: /etc/mongodb.conf
+  log_path: /var/log/mongodb
+  db_path: /var/lib/mongodb
+
+  settings:
+    log_append: True
+    port: 27019
+    bind_ip: 127.0.0.1
+    journal: True
+    configsvr: True
+    shardsvr: False
+    replSet: ''
+    rest: False
