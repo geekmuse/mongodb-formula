@@ -26,7 +26,7 @@ mongodb_repo:
     - name: mongodb-org
     - humanname: MongoDB.org Repository
     - gpgkey: https://www.mongodb.org/static/pgp/server-3.2.asc
-    - baseurl: https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/{{ mdb.version }}/$basearch/
+    - baseurl:  https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/{{ mdb.version }}/$basearch/
     - gpgcheck: 1
     {%- elif mdb.version == 'oldstable' %}
     - name: mongodb-org-{{ mdb.version }}
