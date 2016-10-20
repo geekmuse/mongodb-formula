@@ -7,7 +7,7 @@
 
 mongodb_repo:
   pkgrepo.managed:
-    - name=MongoDB Repository
+    - name=MongoDB
     - baseurl=https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.2/x86_64/
     - gpgcheck=1
     - enabled=1
