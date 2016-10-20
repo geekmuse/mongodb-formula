@@ -1,7 +1,7 @@
 mongodb:
   use_repo: False
   # This is useful default with use_repo: True
-  version: 3.2
+  version: stable
 
   mongodb_package: mongodb
   keyid: EA312927
