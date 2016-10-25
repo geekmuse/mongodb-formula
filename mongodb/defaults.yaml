@@ -23,7 +23,7 @@ mongodb:
     journal: True
     configsvr: False
     shardsvr: True
-    replSet: 'shards'
+    replSet: 'rs0'
     rest: False
 
 mongos:
