@@ -1,7 +1,16 @@
 {%- from "mongodb/map.jinja" import ms with context -%}
 
-mongodb-org-mongos:
-  pkg.installed
+mongos_package:
+{%- if ms.use_repo %}
+  pkgrepo.managed:
+    - humanname: MongoDB Repository
+    - baseurl: https://repo.mongodb.org/yum/amazon/2013.03/mongodb-org/3.2/x86_64/
+    - gpgcheck: 1
+    - enabled: 1
+    - gpgkey: https://www.mongodb.org/static/pgp/server-3.2.asc
+{%- endif %}
+  pkg.installed:
+    - name: {{ ms.mongos_package }}
 
 mongos_user:
   user.present:
