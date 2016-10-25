@@ -1,7 +1,7 @@
 mongodb
 =======
 
-Install and configure various parts of a MongoDB cluster.
+Install and configure various parts of a MongoDB cluster. This specifically targets AWS Linux as the OS and mongo version 3.2.
 
 Available states
 ================
