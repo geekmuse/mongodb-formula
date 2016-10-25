@@ -1,18 +1,7 @@
 {%- from "mongodb/map.jinja" import ms with context -%}
 
-mongos_package:
-{%- if ms.use_repo %}
-  {%- set os = salt['grains.get']('os') | lower() %}
-  {%- set code = salt['grains.get']('oscodename') %}
-  pkgrepo.managed:
-    - humanname: MongoDB.org Repo
-    - name: deb http://repo.mongodb.org/apt/{{ os }} {{ code }}/mongodb-org/stable multiverse
-    - file: /etc/apt/sources.list.d/mongodb-org.list
-    - keyid: EA312927
-    - keyserver: keyserver.ubuntu.com
-{%- endif %}
-  pkg.installed:
-    - name: {{ ms.mongos_package }}
+mongodb-org-mongos:
+  pkg.installed
 
 mongos_user:
   user.present:
