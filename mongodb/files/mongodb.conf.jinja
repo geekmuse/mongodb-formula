@@ -11,6 +11,18 @@
 
 {{ mdb.mongod_settings | yaml(false) }}
 
+{% if 'mongo-shard' in grains['roles'] %}
+sharding:
+  clusterRole: shardsvr
+replication:
+  replSetName: {{ grains['mongodb_replication_set'] }}
+{% elif 'mongo-config' in grains['roles'] %}
+sharding:
+  clusterRole: configsvr
+replication:
+  replSetName: {{ grains['mongodb_replication_set'] }}
+{%- endif %}
+
 {%- else -%}
 
 # mongodb.conf
