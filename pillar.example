@@ -12,8 +12,8 @@ mongodb:
   mongodb_group: mongodb
   mongod: mongod
   conf_path: /etc/mongod.conf
-  log_path: /mongodb/log
-  db_path: /mongodb/data
+  log_path: /var/log/mongodb
+  db_path: /var/lib/mongo
   mongod_settings:
     systemLog:
       destination: file
@@ -57,7 +57,7 @@ mongodb:
 mongos:
   use_repo: True
   mongos_package: mongodb-org-mongos
-  log_path: /mongodb/log
-  log_file: /mongodb/log/mongos.log
+  log_path: /var/log/mongos
+  log_file: /var/log/mongos/mongos.log
   settings:
-    config_svrs: "cfg1.local:27019,cfg2.local:27019,cfg3.local:27019"
+    config_svrs: "__REPLACE__"
