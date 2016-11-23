@@ -3,5 +3,5 @@ base:
     - mongodb.mongos
 
   'G@roles:mongo-shard':
-    - mongodb.tools
     - mongodb
+    # - replicaset_shard

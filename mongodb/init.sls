@@ -20,6 +20,21 @@ mongodb_package:
   pkg.installed:
     - name: {{ mdb.mongodb_package }}
 
+mongodb_user:
+  user.present:
+    - name: {{ mdb.mongodb_user }}
+    - gid_from_name: True
+    - home: {{ mdb.db_path }}
+    - shell: /bin/sh
+    - system: True
+    - require:
+      - group: mongodb_group
+
+mongodb_group:
+  group.present:
+    - name: {{ mdb.mongodb_group }}
+    - system: True
+
 mongodb_log_path:
   file.directory:
     {%- if 'mongod_settings' in mdb %}
