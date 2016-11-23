@@ -8,8 +8,8 @@ mongodb:
   version: 3.2 # use oldstable in for 1.8 - 2.6
   repo_component: multiverse    # this is for Ubuntu, use 'main' for Debian
   mongodb_package: mongodb-org
-  mongodb_user: mongodb
-  mongodb_group: mongodb
+  mongodb_user: mongod
+  mongodb_group: mongod
   mongod: mongod
   conf_path: /etc/mongod.conf
   log_path: /var/log/mongodb
@@ -20,7 +20,7 @@ mongodb:
       logAppend: true
       path: /var/log/mongodb/mongod.log
     storage:
-      dbPath: /var/lib/mongodb
+      dbPath: /var/lib/mongo
       journal:
         enabled: true
     net:
