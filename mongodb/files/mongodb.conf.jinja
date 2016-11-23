@@ -15,12 +15,12 @@
 sharding:
   clusterRole: shardsvr
 replication:
-  replSetName: {{ grains['mongodb_replication_set'] }}
+  replSetName: {{ grains['mongodb_replica_set'] }}
 {% elif 'mongo-config' in grains['roles'] %}
 sharding:
   clusterRole: configsvr
 replication:
-  replSetName: {{ grains['mongodb_replication_set'] }}
+  replSetName: {{ grains['mongodb_replica_set'] }}
 {%- endif %}
 
 {%- else -%}
