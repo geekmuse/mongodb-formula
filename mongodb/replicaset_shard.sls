@@ -7,15 +7,15 @@
 
   {% set my_replica_set = grains['mongodb_replica_set'] %}
   {% set my_id = grains['id'] %}
-  # {% for host, value in salt['mine.get']('mongodb_replica_set:' + grains['mongodb_replica_set'], 'grains.items', expr_form='grain').items() %}
-  # {%     if value.id != my_id and 'mongo-shard' in value.roles and my_replica_set == value.mongodb_replica_set %}
+  {% for host, value in salt['mine.get']('mongodb_replica_set:' + grains['mongodb_replica_set'], 'grains.items', expr_form='grain').items() %}
+  {%     if value.id != my_id and 'mongo-shard' in value.roles and my_replica_set == value.mongodb_replica_set %}
 
-  # mongo local --eval "printjson(rs.add('{{ value.id }}'))":
-  #   cmd:
-  #     - run
+  mongo local --eval "printjson(rs.add('{{ value.id }}'))":
+    cmd:
+      - run
 
-  # {%     endif %}
-  # {% endfor %}
+  {%     endif %}
+  {% endfor %}
 
   mongodb_replica_set_configured:
     grains:
