@@ -1,6 +1,6 @@
 {% if 'mongodb_role' in grains and grains['mongodb_role'] == 'primary' %}
   {% set my_replica_set = grains['mongodb_replica_set'] %}
-  {% set my_id = grains['hostname'] %}
+  {% set my_id = grains['id'] %}
   {% set added = [] %}
   {% set checked_vals = [] %}
   {% if 'mongodb_replica_set_initiated' not in grains or grains['mongodb_replica_set_initiated'] != true %}
@@ -43,7 +43,7 @@
     grains:
       - present
       - value: true
-      
+
     {% endif %}
   {% endif %}
 
