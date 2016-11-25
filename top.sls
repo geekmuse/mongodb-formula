@@ -1,4 +1,7 @@
 base:
+  '*':
+    - saltmine
+
   'G@roles:mongo-router':
     - mongodb.mongos
 

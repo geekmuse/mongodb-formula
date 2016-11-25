@@ -1,0 +1,7 @@
+# This jinja template will demonstrate what grains are available from other nodes via salt's mine.get function
+
+{% for host, data in salt['mine.get']('*', 'grains.items', expr_form = 'grain').items() -%}
+{% for key, value in data.items() -%}
+{{ host }} - {{ key }}: {{ value }}
+{% endfor -%}
+{% endfor -%}
