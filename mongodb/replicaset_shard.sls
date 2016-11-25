@@ -5,7 +5,11 @@
     cmd:
       - run
 
-  mongodb_replica_set_configured:
+  {% set my_replica_set = grains['mongodb_replica_set'] %}
+  {% set my_id = grains['hostname'] %}
+
+
+  mongodb_replica_set_initiated:
     grains:
       - present
       - value: true
