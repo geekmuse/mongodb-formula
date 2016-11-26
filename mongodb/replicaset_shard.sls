@@ -2,7 +2,6 @@
   {% set my_replica_set = grains['mongodb_replica_set'] %}
   {% set my_id = grains['id'] %}
   {% set added = [] %}
-  {% set checked_vals = [] %}
   {% if 'mongodb_replica_set_initiated' not in grains or grains['mongodb_replica_set_initiated'] != true %}
 
   mongo local --eval "printjson(rs.initiate())":
@@ -18,6 +17,7 @@
 
   {% if 'mongodb_replica_set_configured' not in grains or grains['mongodb_replica_set_configured'] != true %}
     {% for host, data in salt['mine.get']('*', 'grains.items', expr_form = 'compound').items() -%}
+      {% set checked_vals = [] %}
       {% for key, value in data.items() -%}
         {% if key == 'id' %}
           {% if checked_vals.append(value) %}{% endif %}

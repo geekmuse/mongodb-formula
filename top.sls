@@ -8,4 +8,3 @@ base:
 
   'G@roles:mongo-shard':
     - mongodb
-    - mongodb.replicaset_shard
