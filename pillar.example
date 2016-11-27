@@ -56,6 +56,9 @@ mongodb:
 ## MongoDB query router configuration
 mongos:
   use_repo: True
+  init_file: /etc/init.d/mongos
+  init_file_template: salt://mongodb/files/mongos.initd.jinja
+  mongo_shell: mongodb-org-shell
   mongos_package: mongodb-org-mongos
   log_path: /var/log/mongos
   log_file: /var/log/mongos/mongos.log
