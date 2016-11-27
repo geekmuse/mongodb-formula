@@ -60,4 +60,4 @@ mongos:
   log_path: /var/log/mongos
   log_file: /var/log/mongos/mongos.log
   settings:
-    config_svrs: "__REPLACE__"
+    config_svrs: "rsC0/__REPLACE__"

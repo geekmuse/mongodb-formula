@@ -11,6 +11,10 @@ mongos_package:
 {%- endif %}
   pkg.installed:
     - name: {{ ms.mongos_package }}
+{%- if ms.use_repo %}
+  pkg.installed:
+    - name: {{ ms.mongo_shell }}
+{%- endif %}
 
 mongos_user:
   user.present:
@@ -41,8 +45,8 @@ mongos_log_path:
 
 mongos_init:
   file.managed:
-    - name: /etc/init/mongos.conf
-    - source: salt://mongodb/files/mongos.upstart.conf.jinja
+    - name: {{ ms.init_file }}
+    - source: {{ ms.init_file_template }}
     - template: jinja
     - user: root
     - group: root

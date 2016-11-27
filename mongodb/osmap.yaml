@@ -3,12 +3,17 @@ default: {}
 Debian:
   # Install MongoDB 2.4 from Debian repo
   use_repo: False
+  init_file: /etc/init/mongos.conf
+  init_file_template: salt://mongodb/files/mongos.upstart.conf.jinja
   mongodb_package: mongodb
   repo_component: main
 
 RedHat:
   use_repo: True
+  init_file: /etc/init.d/mongos
+  init_file_template: salt://mongodb/files/mongos.initd.jinja
   mongodb_package: mongodb-org
+  mongo_shell: mongodb-org-shell
 
   mongodb_user: mongod
   mongodb_group: mongod
