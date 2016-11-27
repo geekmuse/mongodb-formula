@@ -11,7 +11,9 @@ mongos_package:
 {%- endif %}
   pkg.installed:
     - name: {{ ms.mongos_package }}
+
 {%- if ms.use_repo %}
+mongo_shell:
   pkg.installed:
     - name: {{ ms.mongo_shell }}
 {%- endif %}
