@@ -7,9 +7,8 @@
 {{ ms.mongos_settings | yaml(true) }}
 
 {%- else -%}
-
-port: {{ ms.settings.port }}
-logpath: {{ ms.log_file }}
-sharding:
-  configdb: {{ ms.settings.config_svrs }}
+fork=true
+port={{ ms.settings.port }}
+logpath={{ ms.log_file }}
+configdb={{ ms.settings.config_svrs }}
 {%- endif %}
