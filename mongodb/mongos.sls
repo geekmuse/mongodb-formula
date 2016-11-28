@@ -63,9 +63,6 @@ mongos_config:
     - group: root
     - mode: 644
 
-mongos_service:
-  service.running:
-    - name: {{ ms.mongos }}
-    - enable: True
-    - watch:
-      - file: mongos_config
+service mongos start:
+  cmd.run
+
