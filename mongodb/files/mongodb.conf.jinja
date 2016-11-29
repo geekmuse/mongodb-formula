@@ -11,7 +11,7 @@
 
 {% if 'mongo-shard' in grains['roles'] %}
 {{ mdb.mongod_settings | yaml(false) }}
-{% elsif 'mongo-config' in grains['roles'] %}
+{% elif 'mongo-config' in grains['roles'] %}
 {{ mdb.config_settings | yaml(false) }}
 {% endif %}
 
