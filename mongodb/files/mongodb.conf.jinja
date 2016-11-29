@@ -4,16 +4,16 @@
 
 {% if 'mongod_settings' in mdb -%}
 
-{% if 'mongo-config' in grains['roles'] %}
-  {% set mdb['mongo_settings']['net']['port'] = '27019' %}
-{% endif %}
-
 # mongod.conf
 
 # for documentation of all options, see:
 #   http://docs.mongodb.org/manual/reference/configuration-options/
 
+{% if 'mongo-shard' in grains['roles'] %}
 {{ mdb.mongod_settings | yaml(false) }}
+{% elsif 'mongo-config' in grains['roles'] %}
+{{ mdb.config_settings | yaml(false) }}
+{% endif %}
 
 {% if 'mongo-shard' in grains['roles'] %}
 sharding:
