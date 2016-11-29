@@ -67,7 +67,7 @@ mongos_config:
   file.directory:
     - user: {{ ms.mongos_user }}
     - group: {{ ms.mongos_group }}
-    - mode: 644
+    - mode: 755
     - makedirs: True
 
 /etc/sysconfig/mongos:
