@@ -1,24 +1,81 @@
 #!/bin/bash
 
-### BEGIN INIT INFO
-# Provides:        MongoDB Config Server
-# Required-Start:  $network
-# Required-Stop:   $network
-# Default-Start:   2 3 4 5
-# Default-Stop:    0 1 6
-# Short-Description: Start/Stop MongoDB Config server
-### END INIT INFO
+# mongos - Startup script for mongos
 
-start() {
-        /usr/bin/mongos --config /etc/mongos.conf &
+# chkconfig: 35 85 15
+# description: Mongo Router Process for sharding
+# processname: mongos
+# config: /etc/mongos.conf
+# pidfile: /var/run/mongo/mongos.pid
+
+. /etc/rc.d/init.d/functions
+
+# mongos will read mongos.conf for configuration settings
+
+# NOTE: if you change any OPTIONS here, you get what you pay for:
+# this script assumes all options are in the config file.
+CONFIGFILE="/etc/mongos.conf"
+OPTIONS=" -f $CONFIGFILE"
+SYSCONFIG="/etc/sysconfig/mongos"
+
+PID_PATH=/var/run/mongo
+PID_FILE=${PID_PATH}/mongos.pid
+MONGO_BIN=/usr/bin/mongos
+MONGO_ULIMIT=12000
+MONGO_LOCK_FILE=/var/lock/subsys/mongos
+
+MONGO_USER=mongod
+MONGO_GROUP=mongod
+
+. "$SYSCONFIG" || true
+
+start()
+{
+  echo -n $"Starting mongos: "
+  daemon --user "$MONGO_USER" --pidfile $PID_FILE $MONGO_BIN $OPTIONS --pidfilepath=$PID_FILE
+  RETVAL=$?
+  echo
+  [ $RETVAL -eq 0 ] && touch $MONGO_LOCK_FILE
 }
 
-stop() {
-        for a in `ps -ef | grep mongos | awk '{print $2}'`; do kill -9 $a; done
+stop()
+{
+  echo -n $"Stopping mongos: "
+  killproc -p $PID_FILE -t30 -TERM $MONGO_BIN
+  RETVAL=$?
+  echo
+  [ $RETVAL -eq 0 ] && rm -f $MONGO_LOCK_FILE
+  [ $RETVAL -eq 0 ] && rm -f $PID_FILE
 }
 
-case $1 in
-  start|stop) $1;;
-  restart) stop; start;;
-  *) echo "Run as $0 <start|stop|restart>"; exit 1;;
+restart () {
+  stop
+  start
+}
+
+ulimit -n $MONGO_ULIMIT
+RETVAL=0
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  restart|reload|force-reload)
+    restart
+    ;;
+  condrestart)
+    [ -f $MONGO_LOCK_FILE ] && restart || :
+    ;;
+  status)
+    status -p $PID_FILE $MONGO_BIN
+    RETVAL=$?
+    ;;
+  *)
+    echo "Usage: $0 {start|stop|status|restart|reload|force-reload|condrestart}"
+    RETVAL=1
 esac
+
+exit $RETVAL

@@ -63,6 +63,19 @@ mongos_config:
     - group: root
     - mode: 644
 
-service mongos start:
-  cmd.run
+/var/run/mongo:
+  file.directory:
+    - user: {{ ms.mongos_user }}
+    - group: {{ ms.mongos_group }}
+    - mode: 644
+    - makedirs: True
 
+/etc/sysconfig/mongos:
+  file.touch
+
+mongos_service:
+  service.running:
+    - name: {{ ms.mongos }}
+    - enable: True
+    - watch:
+      - file: mongos_config
