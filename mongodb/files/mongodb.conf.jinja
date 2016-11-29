@@ -5,7 +5,7 @@
 {% if 'mongod_settings' in mdb -%}
 
 {% if 'mongo-config' in grains['roles'] %}
-  {% set mdb.mongo_settings.net.port = '27019' %}
+  {% set mdb['mongo_settings']['net']['port'] = '27019' %}
 {% endif %}
 
 # mongod.conf
